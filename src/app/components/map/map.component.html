@@ -1,0 +1,17 @@
+<div class="flex justify-between px-5 pt-6">
+    <div>  </div>
+    <div>  <p  (click)="openCoordinateInputDialog()" class="ml-4"> <span class="bg-blue-300 p-2 rounded-lg font-medium hover:bg-black hover:text-blue-300 cursor-pointer">Add Coordinates</span></p></div>
+</div>
+<div id="map"></div>
+
+<div class="">
+
+    <div class="flex justify-between">
+        <div>  <p  (click)="callCalculateAreaFunction()" class="ml-4"> <span class="bg-blue-300 p-2 rounded-lg font-medium hover:bg-black hover:text-blue-300 cursor-pointer">Calculate Area</span></p></div>
+        <div>  <p  (click)="ClearArea()" class="ml-4"> <span class="bg-blue-300 p-2 rounded-lg font-medium hover:bg-black hover:text-blue-300 cursor-pointer">Clear Area</span></p></div>
+    </div>
+  
+
+    <p *ngIf="calculatedArea" class="text-2xl mx-auto text-center">The calculated area is <span class="3xl font-medium">{{calculatedArea}}</span></p>
+
+</div>
