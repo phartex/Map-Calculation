@@ -41,12 +41,26 @@ export class MapComponent implements OnInit {
       //     zoomOffset: -1,
       //     accessToken: 'your.mapbox.access.token',
       //   }
-      // ).addTo(mymap);
+      // ).addTo(this.mymap);
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(this.mymap);
+      
+      L.tileLayer(
+        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2wxNnN5cHdtMTM1MjNrcWFsZmFhNm5jMiJ9.IuLI79FmVH1-XyXpn3_IMA',
+        {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox/streets-v11',
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken: 'pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2wxNnN5cHdtMTM1MjNrcWFsZmFhNm5jMiJ9.IuLI79FmVH1-XyXpn3_IMA',
+        }
+      ).addTo(this.mymap);
+
+      // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      //   maxZoom: 19,
+      //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      // }).addTo(this.mymap);
       let marker = L.marker(this.latLong).addTo(this.mymap);
 
       marker.bindPopup('<b>Hi</b>').openPopup();
