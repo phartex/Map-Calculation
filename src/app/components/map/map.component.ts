@@ -18,74 +18,53 @@ export class MapComponent implements OnInit {
 
   constructor(private dialog: MatDialog){}
   ngOnInit() {
-    if (!navigator.geolocation) {
-      console.log('location is not supported');
-    }
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.coords = position.coords;
-      this.latLong = [this.coords.latitude, this.coords.longitude];
-      this.mymap = L.map('map').setView(this.latLong, 13);
-      this.mymap.on('click', (event: any) => {
-        console.log(event);
-        this.callPopUp(event)
-      });
+    // if (!navigator.geolocation) {
+    //   console.log('location is not supported');
+    // }
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //   this.coords = position.coords;
+    //   this.latLong = [this.coords.latitude, this.coords.longitude];
+    //   this.mymap = L.map('map').setView(this.latLong, 13);
+    //   this.mymap.on('click', (event: any) => {
+    //     console.log(event);
+    //     this.callPopUp(event)
+    //   });
 
-      // L.tileLayer(
-      //   'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3VicmF0MDA3IiwiYSI6ImNrYjNyMjJxYjBibnIyem55d2NhcTdzM2IifQ.-NnMzrAAlykYciP4RP9zYQ',
-      //   {
-      //     attribution:
-      //       'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      //     maxZoom: 18,
-      //     id: 'mapbox/streets-v11',
-      //     tileSize: 512,
-      //     zoomOffset: -1,
-      //     accessToken: 'your.mapbox.access.token',
-      //   }
-      // ).addTo(this.mymap);
 
       
-      L.tileLayer(
-        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2x2dmwwNjJ2MDJ6YTJxbXQ0N29qbGprdyJ9.goq4t5ABrFBmbjMVZV-v3w',
-        {
-          attribution:
-            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-          maxZoom: 18,
-          id: 'mapbox/streets-v11',
-          tileSize: 512,
-          zoomOffset: -1,
-          accessToken: 'pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2x2dmwwNjJ2MDJ6YTJxbXQ0N29qbGprdyJ9.goq4t5ABrFBmbjMVZV-v3w',
-        }
-      ).addTo(this.mymap);
+    //   L.tileLayer(
+    //     'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2x2dmwwNjJ2MDJ6YTJxbXQ0N29qbGprdyJ9.goq4t5ABrFBmbjMVZV-v3w',
+    //     {
+    //       attribution:
+    //         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    //       maxZoom: 18,
+    //       id: 'mapbox/streets-v11',
+    //       tileSize: 512,
+    //       zoomOffset: -1,
+    //       accessToken: 'pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2x2dmwwNjJ2MDJ6YTJxbXQ0N29qbGprdyJ9.goq4t5ABrFBmbjMVZV-v3w',
+    //     }
+    //   ).addTo(this.mymap);
 
-      // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      //   maxZoom: 19,
-      //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      // }).addTo(this.mymap);
-      let marker = L.marker(this.latLong).addTo(this.mymap);
+ 
+    //   let marker = L.marker(this.latLong).addTo(this.mymap);
 
-      marker.bindPopup('<b>Hi</b>').openPopup();
+    //   marker.bindPopup('<b>Hi</b>').openPopup();
 
-      let popup = L.popup()
-        .setLatLng(this.latLong)
-        .setContent('I am fateru victor')
-        .openOn(this.mymap);
-    });
-    this.watchPosition();
+    //   let popup = L.popup()
+    //     .setLatLng(this.latLong)
+    //     .setContent('I am fateru victor')
+    //     .openOn(this.mymap);
+    // });
+    // this.watchPosition();
 
   }
   callPopUp(e: any) {
-    // var popup = L.popup();
-    // popup.setLatLng(e.latlng)
-    // .setContent("You clicked the map at " + e.latlng.toString())
-    // .openOn(this.mymap);
-    // const test = {[e.latlng.lat, e.latlng.lng]}
+
     let marker = null;
-    // console.log(this.coordinateArray.length)
 
     marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.mymap)
     if (this.coordinates.length === 5) {
       this.mymap.removeLayer(marker);
-      // this.calculatedArea = this.calculateArea(this.coordinates);
       console.log(this.calculateArea(this.coordinates))
     }
     else {
@@ -131,13 +110,12 @@ export class MapComponent implements OnInit {
   }
 
   calculateArea(coordinates: L.LatLng[]): number {
-    // Ensure the polygon is closed
     if (!coordinates || coordinates.length < 3) {
-        return 0; // Not enough coordinates to form a polygon
+        return 0;
     }
     
     if (!coordinates[0].equals(coordinates[coordinates.length - 1])) {
-        coordinates.push(coordinates[0]); // Make sure the polygon is closed
+        coordinates.push(coordinates[0]);
     }
     
     let area = 0;
@@ -163,7 +141,6 @@ openCoordinateInputDialog() {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      // Add marker or handle the entered coordinates here
       console.log('Entered coordinates:', result);
       const latLngs = result.map((coord: any[]) => L.latLng(coord[0], coord[1]));
       console.log(latLngs)
