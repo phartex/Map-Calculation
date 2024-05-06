@@ -154,8 +154,8 @@ openCoordinateInputDialog() {
       const latLngs = result.map((coord: any[]) => L.latLng(coord[0], coord[1]));
       console.log(latLngs)
       this.calculatedArea = this.calculateArea(latLngs);
-      // console.log(this.calculatedArea)
-      // console.log(this.calculatedArea)
+      console.log(this.calculatedArea)
+      console.log(this.calculatedArea)
     }
   });
 }
