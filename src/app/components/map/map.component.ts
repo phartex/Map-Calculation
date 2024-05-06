@@ -155,6 +155,7 @@ openCoordinateInputDialog() {
       console.log(latLngs)
       this.calculatedArea = this.calculateArea(latLngs);
       console.log(this.calculatedArea)
+      console.log(this.calculatedArea)
     }
   });
 }
