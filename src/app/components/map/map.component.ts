@@ -18,44 +18,44 @@ export class MapComponent implements OnInit {
 
   constructor(private dialog: MatDialog){}
   ngOnInit() {
-    // if (!navigator.geolocation) {
-    //   console.log('location is not supported');
-    // }
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //   this.coords = position.coords;
-    //   this.latLong = [this.coords.latitude, this.coords.longitude];
-    //   this.mymap = L.map('map').setView(this.latLong, 13);
-    //   this.mymap.on('click', (event: any) => {
-    //     console.log(event);
-    //     this.callPopUp(event)
-    //   });
+    if (!navigator.geolocation) {
+      console.log('location is not supported');
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.coords = position.coords;
+      this.latLong = [this.coords.latitude, this.coords.longitude];
+      this.mymap = L.map('map').setView(this.latLong, 13);
+      this.mymap.on('click', (event: any) => {
+        console.log(event);
+        this.callPopUp(event)
+      });
 
 
       
-    //   L.tileLayer(
-    //     'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2x2dmwwNjJ2MDJ6YTJxbXQ0N29qbGprdyJ9.goq4t5ABrFBmbjMVZV-v3w',
-    //     {
-    //       attribution:
-    //         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    //       maxZoom: 18,
-    //       id: 'mapbox/streets-v11',
-    //       tileSize: 512,
-    //       zoomOffset: -1,
-    //       accessToken: 'pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2x2dmwwNjJ2MDJ6YTJxbXQ0N29qbGprdyJ9.goq4t5ABrFBmbjMVZV-v3w',
-    //     }
-    //   ).addTo(this.mymap);
+      L.tileLayer(
+        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2x2dmwwNjJ2MDJ6YTJxbXQ0N29qbGprdyJ9.goq4t5ABrFBmbjMVZV-v3w',
+        {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox/streets-v11',
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken: 'pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2x2dmwwNjJ2MDJ6YTJxbXQ0N29qbGprdyJ9.goq4t5ABrFBmbjMVZV-v3w',
+        }
+      ).addTo(this.mymap);
 
  
-    //   let marker = L.marker(this.latLong).addTo(this.mymap);
+      let marker = L.marker(this.latLong).addTo(this.mymap);
 
-    //   marker.bindPopup('<b>Hi</b>').openPopup();
+      marker.bindPopup('<b>Hi</b>').openPopup();
 
-    //   let popup = L.popup()
-    //     .setLatLng(this.latLong)
-    //     .setContent('I am fateru victor')
-    //     .openOn(this.mymap);
-    // });
-    // this.watchPosition();
+      let popup = L.popup()
+        .setLatLng(this.latLong)
+        .setContent('I am fateru victor')
+        .openOn(this.mymap);
+    });
+    this.watchPosition();
 
   }
   callPopUp(e: any) {

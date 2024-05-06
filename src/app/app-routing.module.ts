@@ -6,7 +6,7 @@ import { Map2Component } from './components/map2/map2.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: '/dd', pathMatch: 'full'
+    path: '', redirectTo: '/home', pathMatch: 'full'
   },
   {
     path:'home',
