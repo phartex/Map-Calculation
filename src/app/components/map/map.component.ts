@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CoordinateInputDialogComponent } from '../coordinate-input-dialog/coordinate-input-dialog.component';
+import { layerGroup } from 'leaflet';
+import { Location } from '@angular/common';
 
 
 declare const L: any;
@@ -15,8 +17,9 @@ export class MapComponent implements OnInit {
   mymap: any;
   coordinates: L.LatLng[] = [];
   public calculatedArea: any;
+  selectedMarkers:  L.LatLng[] = [];
 
-  constructor(private dialog: MatDialog){}
+  constructor(private dialog: MatDialog, private location : Location){}
   ngOnInit() {
     if (!navigator.geolocation) {
       console.log('location is not supported');
@@ -70,8 +73,10 @@ export class MapComponent implements OnInit {
     else {
      this.addMarker(e.latlng); 
      this.coordinates.push(e.latlng);
-     
-      console.log(this.coordinates)
+     this.selectedMarkers.push(marker);
+     console.log(marker)
+     console.log(this.selectedMarkers)
+      console.log(this.coordinates,marker)
 
     }
 
@@ -129,7 +134,12 @@ export class MapComponent implements OnInit {
 ClearArea(){
   this.coordinates = [];
   this.calculatedArea = null;
-  window.location.reload()
+
+  
+}
+
+removeSelectedMarkers() {
+window.location.reload()
 }
 
 openCoordinateInputDialog() {
@@ -150,6 +160,7 @@ openCoordinateInputDialog() {
     }
   });
 }
+
 
 
 

@@ -10,7 +10,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class CoordinateInputDialogComponent {
   coordinateForm !: FormGroup
 
-  constructor(private fb: FormBuilder,private dialogRef: MatDialogRef<CoordinateInputDialogComponent>) {
+  constructor(private location: Location,private fb: FormBuilder,private dialogRef: MatDialogRef<CoordinateInputDialogComponent>) {
     this.coordinateForm = this.fb.group({
       bvn: ['', Validators.required],
       nin: ['', Validators.required],
