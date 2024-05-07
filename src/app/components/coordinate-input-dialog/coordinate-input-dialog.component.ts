@@ -21,14 +21,12 @@ export class CoordinateInputDialogComponent {
 
   }
   submit(data: any) {
-    // Prepare the coordinates array
     const coordinates = [];
     for (let i = 0; i < 4; i++) {
       if (data[`latitude${i}`] !== null && data[`longitude${i}`] !== null) {
         coordinates.push([parseFloat(data[`latitude${i}`]), parseFloat(data[`longitude${i}`])]);
       }
     }
-    // Close the dialog and pass the coordinates
     this.dialogRef.close(coordinates);
   }
 

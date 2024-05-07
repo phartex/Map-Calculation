@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CoordinateInputDialogComponent } from '../coordinate-input-dialog/coordinate-input-dialog.component';
 import { layerGroup } from 'leaflet';
 import { Location } from '@angular/common';
+import { AreaCalculationService } from 'src/app/services/area-calculation.service';
 
 
 declare const L: any;
@@ -17,9 +18,9 @@ export class MapComponent implements OnInit {
   mymap: any;
   coordinates: L.LatLng[] = [];
   public calculatedArea: any;
-  selectedMarkers:  L.LatLng[] = [];
+  selectedMarkers: L.LatLng[] = [];
 
-  constructor(private dialog: MatDialog, private location : Location){}
+  constructor(private dialog: MatDialog, private location: Location, private areaCalculation: AreaCalculationService) { }
   ngOnInit() {
     if (!navigator.geolocation) {
       console.log('location is not supported');
@@ -34,7 +35,7 @@ export class MapComponent implements OnInit {
       });
 
 
-      
+
       L.tileLayer(
         'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmVhdXRpcGh1bG1pbmQiLCJhIjoiY2x2dmwwNjJ2MDJ6YTJxbXQ0N29qbGprdyJ9.goq4t5ABrFBmbjMVZV-v3w',
         {
@@ -48,7 +49,7 @@ export class MapComponent implements OnInit {
         }
       ).addTo(this.mymap);
 
- 
+
       let marker = L.marker(this.latLong).addTo(this.mymap);
 
       marker.bindPopup('<b>Hi</b>').openPopup();
@@ -68,16 +69,12 @@ export class MapComponent implements OnInit {
     marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.mymap)
     if (this.coordinates.length === 5) {
       this.mymap.removeLayer(marker);
-      console.log(this.calculateArea(this.coordinates))
     }
     else {
-     this.addMarker(e.latlng); 
-     this.coordinates.push(e.latlng);
-     this.selectedMarkers.push(marker);
-     console.log(marker)
-     console.log(this.selectedMarkers)
-      console.log(this.coordinates,marker)
-
+      this.addMarker(e.latlng);
+      this.coordinates.push(e.latlng);
+      this.selectedMarkers.push(marker);
+      console.log(this.coordinates)
     }
 
   }
@@ -109,57 +106,55 @@ export class MapComponent implements OnInit {
     );
   }
 
-  callCalculateAreaFunction(){
-   this.calculatedArea =  this.calculateArea(this.coordinates);
+  callCalculateAreaFunction() {
+    this.calculatedArea = this.areaCalculation.calculateArea(this.coordinates);
 
   }
 
   calculateArea(coordinates: L.LatLng[]): number {
     if (!coordinates || coordinates.length < 3) {
-        return 0;
+      return 0;
     }
-    
+
     if (!coordinates[0].equals(coordinates[coordinates.length - 1])) {
-        coordinates.push(coordinates[0]);
+      coordinates.push(coordinates[0]);
     }
-    
+
     let area = 0;
     for (let i = 0; i < coordinates.length - 1; i++) {
-        area += (coordinates[i].lng * coordinates[i + 1].lat) - (coordinates[i + 1].lng * coordinates[i].lat);
+      area += (coordinates[i].lng * coordinates[i + 1].lat) - (coordinates[i + 1].lng * coordinates[i].lat);
     }
-    
+
     return Math.abs(area / 2);
-}
+  }
 
-ClearArea(){
-  this.coordinates = [];
-  this.calculatedArea = null;
+  ClearArea() {
+    this.coordinates = [];
+    this.calculatedArea = null;
 
-  
-}
 
-removeSelectedMarkers() {
-window.location.reload()
-}
+  }
 
-openCoordinateInputDialog() {
-  const dialogRef = this.dialog.open(CoordinateInputDialogComponent, {
-    minWidth: '550px',
+  removeSelectedMarkers() {
+    window.location.reload()
+  }
+
+  openCoordinateInputDialog() {
+    const dialogRef = this.dialog.open(CoordinateInputDialogComponent, {
+      minWidth: '550px',
       maxWidth: '600px',
       height: '80vh',
-  });
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      console.log('Entered coordinates:', result);
-      const latLngs = result.map((coord: any[]) => L.latLng(coord[0], coord[1]));
-      console.log(latLngs)
-      this.calculatedArea = this.calculateArea(latLngs);
-      console.log(this.calculatedArea)
-      console.log(this.calculatedArea)
-    }
-  });
-}
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Entered coordinates:', result);
+        const latLngs = result.map((coord: any[]) => L.latLng(coord[0], coord[1]));
+        console.log(latLngs)
+        this.calculatedArea = this.areaCalculation.calculateArea(latLngs);
+      }
+    });
+  }
 
 
 
