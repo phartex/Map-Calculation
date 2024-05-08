@@ -7,7 +7,7 @@ import { mapPointGuard } from './guard/map-point.guard';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: '/home', pathMatch: 'full'
+    path: '', redirectTo: 'home', pathMatch: 'full'
   },
   {
     path:'home',
