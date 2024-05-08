@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapComponent } from './components/map/map.component';
 import { ResultDisplayComponent } from './components/result-display/result-display.component';
-import { Map2Component } from './components/map2/map2.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialUiModule } from './common/material-ui/material-ui.module';
 import { CoordinateInputDialogComponent } from './components/coordinate-input-dialog/coordinate-input-dialog.component';
@@ -17,7 +16,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AppComponent,
     MapComponent,
     ResultDisplayComponent,
-    Map2Component,
     CoordinateInputDialogComponent
   ],
   imports: [
