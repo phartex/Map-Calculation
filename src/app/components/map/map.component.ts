@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { AreaCalculationService } from 'src/app/services/area-calculation.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 declare const L: any;
@@ -26,7 +27,7 @@ export class MapComponent implements OnInit, OnDestroy {
   // private subscription: Subscription;
 
   constructor(private dialog: MatDialog, private location: Location,
-    public areaCalculation: AreaCalculationService, private router: Router) { }
+    public areaCalculation: AreaCalculationService, private router: Router, private snackBar : MatSnackBar) { }
 
 
   ngOnInit() {
@@ -150,6 +151,17 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   callCalculateAreaFunction() {
+    if(this.coordinates.length <=0){
+      this.snackBar.open(
+        'Please select 5 point to calculate the area',
+        'Error',
+        {
+          duration: 5000,
+          verticalPosition: 'top',
+          panelClass: ['error-snackBar'],
+        }
+      );
+    }
     this.calculatedArea = this.areaCalculation.calculateArea(this.coordinates);
 
   }
