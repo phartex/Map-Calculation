@@ -20,7 +20,6 @@ export class CoordinateInputPageComponent {
   }
 
   submit(data: any) {
-    console.log(data);
     const coordinates = [];
     for (let i = 0; i < 4; i++) {
       if (data[`latitude${i}`] !== null && data[`longitude${i}`] !== null) {
@@ -28,18 +27,13 @@ export class CoordinateInputPageComponent {
       }
     }
     const latLngs = coordinates.map((coord: any[]) => L.latLng(coord[0], coord[1]));
-    console.log(latLngs)
     this.calculatedArea = this.areaCalculationService.calculateArea(latLngs);
     this.areaCalculationService.areaValueState.next(this.calculatedArea);
 
     let myNumber = this.calculatedArea;
     localStorage.setItem('area', myNumber);
-    console.log(typeof myNumber.toString())
-
     this.router.navigate(['/home']);
 
-
-    console.log(typeof this.calculatedArea)
   }
 
 }

@@ -33,7 +33,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.storedArea = localStorage.getItem('area');
     this.retrievedNumber = parseFloat(this.storedArea);
-    console.log(this.coordinates)
     this.areaCalculation.mapGuardState.next(false)
 
     // if (!navigator.geolocation) {
@@ -97,10 +96,8 @@ export class MapComponent implements OnInit, OnDestroy {
     // Listen for click events on the map
     this.mymap.on('click', (event: any) => {
       if(this.coordinates.length >=0){
-        console.log('true')
         this.areaCalculation.mapGuardState.next(true)
       }else{
-        console.log('false')
         this.areaCalculation.mapGuardState.next(false)
       }
 
@@ -121,7 +118,6 @@ export class MapComponent implements OnInit, OnDestroy {
       this.addMarker(e.latlng);
       this.coordinates.push(e.latlng);
       this.selectedMarkers.push(marker);
-      console.log(this.coordinates)
     }
 
   }
@@ -135,9 +131,9 @@ export class MapComponent implements OnInit, OnDestroy {
     let desLon = 0;
     let id = navigator.geolocation.watchPosition(
       (position) => {
-        console.log(
-          `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
-        );
+        // console.log(
+        //   `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
+        // );
         if (position.coords.latitude === desLat) {
           navigator.geolocation.clearWatch(id);
         }

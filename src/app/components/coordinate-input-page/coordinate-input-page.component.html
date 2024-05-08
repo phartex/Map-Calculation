@@ -16,9 +16,12 @@
         <div *ngFor="let i of [0, 1, 2, 3]" class="block md:flex md:justify-between">
             <ng-container></ng-container>
             <mat-form-field>
+                <mat-label class="text-sm">Latitude</mat-label>
                 <input matInput type="number" placeholder="6.4368514" name="latitude{{i}}"  ngModel required>
             </mat-form-field>
+            
             <mat-form-field class="px-3">
+                <mat-label class="text-sm">Longitude</mat-label>
                 <input matInput type="number" placeholder="3.4300456" name="longitude{{i}}" ngModel required>
             </mat-form-field>
             <!-- <div>
