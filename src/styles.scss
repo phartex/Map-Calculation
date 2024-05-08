@@ -4,3 +4,14 @@
 @tailwind utilities;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.error-snackBar{
+    background-color: #fff !important;
+    height: 2em;
+    font-size: 2em !important;
+    font-weight: 400;
+    color: #fd5c01;
+  }
+
+ 

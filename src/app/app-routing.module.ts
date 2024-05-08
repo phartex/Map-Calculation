@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MapComponent } from './components/map/map.component';
 import { ResultDisplayComponent } from './components/result-display/result-display.component';
 import { CoordinateInputPageComponent } from './components/coordinate-input-page/coordinate-input-page.component';
+import { mapPointGuard } from './guard/map-point.guard';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
   },
   {
     path:'form-input',
-    component: CoordinateInputPageComponent
+    component: CoordinateInputPageComponent,
+    canActivate:[mapPointGuard]
   }
 ];
 

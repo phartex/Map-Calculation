@@ -7,6 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 export class AreaCalculationService {
 areaValueState = new BehaviorSubject<any>('');
 areaValue = this.areaValueState.asObservable();
+
+mapGuardState= new BehaviorSubject<boolean>(false);
+mapGuard = this.areaValueState.asObservable();
   constructor() { }
 
 

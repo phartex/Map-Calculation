@@ -33,7 +33,8 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.storedArea = localStorage.getItem('area');
     this.retrievedNumber = parseFloat(this.storedArea);
-
+    console.log(this.coordinates)
+    this.areaCalculation.mapGuardState.next(false)
 
     // if (!navigator.geolocation) {
     //   console.log('location is not supported');
@@ -95,11 +96,20 @@ export class MapComponent implements OnInit, OnDestroy {
 
     // Listen for click events on the map
     this.mymap.on('click', (event: any) => {
+      if(this.coordinates.length >=0){
+        console.log('true')
+        this.areaCalculation.mapGuardState.next(true)
+      }else{
+        console.log('false')
+        this.areaCalculation.mapGuardState.next(false)
+      }
+
       this.callPopUp(event);
     });
   }
 
   callPopUp(e: any) {
+
 
     let marker = null;
 
