@@ -179,6 +179,8 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   removeSelectedMarkers() {
+    this.calculatedArea = null;
+    this.areaCalculation.areaValueState.next('');
     this.router.navigate([this.router.url])
   }
 
