@@ -151,7 +151,7 @@ console.log(this.retrievedNumber)
   }
 
   removeSelectedMarkers() {
-    window.location.reload()
+    this.router.navigate([this.router.url])
   }
 
   openCoordinateInputDialog() {
