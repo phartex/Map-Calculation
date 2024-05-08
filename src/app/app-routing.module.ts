@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MapComponent } from './components/map/map.component';
 import { ResultDisplayComponent } from './components/result-display/result-display.component';
+import { CoordinateInputPageComponent } from './components/coordinate-input-page/coordinate-input-page.component';
 
 const routes: Routes = [
   {
@@ -12,8 +13,8 @@ const routes: Routes = [
     component: MapComponent
   },
   {
-    path:'result-display',
-    component: ResultDisplayComponent
+    path:'form-input',
+    component: CoordinateInputPageComponent
   }
 ];
 

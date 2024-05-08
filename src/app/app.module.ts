@@ -10,13 +10,15 @@ import { MaterialUiModule } from './common/material-ui/material-ui.module';
 import { CoordinateInputDialogComponent } from './components/coordinate-input-dialog/coordinate-input-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CoordinateInputPageComponent } from './components/coordinate-input-page/coordinate-input-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     ResultDisplayComponent,
-    CoordinateInputDialogComponent
+    CoordinateInputDialogComponent,
+    CoordinateInputPageComponent
   ],
   imports: [
     BrowserModule,

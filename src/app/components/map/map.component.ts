@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CoordinateInputDialogComponent } from '../coordinate-input-dialog/coordinate-input-dialog.component';
 import { layerGroup } from 'leaflet';
 import { Location } from '@angular/common';
 import { AreaCalculationService } from 'src/app/services/area-calculation.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 declare const L: any;
@@ -12,16 +14,29 @@ declare const L: any;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   coords: any;
   latLong: any;
   mymap: any;
   coordinates: L.LatLng[] = [];
   public calculatedArea: any;
   selectedMarkers: L.LatLng[] = [];
+  storedArea : any 
+  retrievedNumber: any;
+  // private subscription: Subscription;
 
-  constructor(private dialog: MatDialog, private location: Location, private areaCalculation: AreaCalculationService) { }
+  constructor(private dialog: MatDialog, private location: Location,
+    public areaCalculation: AreaCalculationService, private router: Router) { }
+
+
   ngOnInit() {
+
+this.storedArea = localStorage.getItem('area');
+this.retrievedNumber = parseFloat(this.storedArea);
+
+// this.retrievedNumber ? this.removeSelectedMarkers() : "";
+
+console.log(this.retrievedNumber)
     if (!navigator.geolocation) {
       console.log('location is not supported');
     }
@@ -100,7 +115,7 @@ export class MapComponent implements OnInit {
       },
       {
         enableHighAccuracy: true,
-        timeout: 5000,
+        timeout: 10000,
         maximumAge: 0,
       }
     );
@@ -156,7 +171,11 @@ export class MapComponent implements OnInit {
     });
   }
 
+  routeToForm() {
+    this.router.navigate(['/form-input']);
+  }
 
-
-
+  ngOnDestroy(): void {
+    // throw new Error('Method not implemented.');
+  }
 }

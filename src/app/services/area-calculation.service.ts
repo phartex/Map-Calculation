@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AreaCalculationService {
-
+areaValueState = new BehaviorSubject<any>('');
+areaValue = this.areaValueState.asObservable();
   constructor() { }
 
 

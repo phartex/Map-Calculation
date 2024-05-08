@@ -1,0 +1,46 @@
+<!-- <form #form="ngForm" (ngSubmit)="submit(form.value)" autocomplete="off">
+    <div *ngFor="let i of [0, 1, 2, 3]">
+        <mat-form-field>
+            <input matInput type="number" name="latitude{{i}}" placeholder="Latitude {{i+1}}" ngModel required>
+        </mat-form-field>
+        <mat-form-field class="px-3">
+            <input matInput type="number" name="longitude{{i}}" placeholder="Longitude {{i+1}}" ngModel required>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button type="submit" color="primary" [disabled]="form.invalid">Submit</button>
+</form> -->
+
+<div class="control mx-auto text-center md:px-[20em] mt-8">
+    <p class="text-3xl font-medium">Coordinate Input form</p>
+    <form #form="ngForm" class="text-center mx-auto shadow-2xl p-9 border rounded-lg border-gray-600"  (ngSubmit)="submit(form.value)" autocomplete="off">
+        <div *ngFor="let i of [0, 1, 2, 3]" class="block md:flex md:justify-between">
+            <ng-container></ng-container>
+            <mat-form-field>
+                <input matInput type="number" placeholder="6.4368514" name="latitude{{i}}"  ngModel required>
+            </mat-form-field>
+            <mat-form-field class="px-3">
+                <input matInput type="number" placeholder="3.4300456" name="longitude{{i}}" ngModel required>
+            </mat-form-field>
+            <!-- <div>
+                <mat-label class="text-sm">Latitude {{i+1}}</mat-label>
+                <mat-form-field class="w-full rounded-xl mb-3" appearance="outline">
+                    <input matInput placeholder="6.4368514"  type="number" name="number"
+                        id="number" ngModel required>
+                    <mat-error>Please enter a valid lattitude</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="text-sm">Longitude {{i+1}}</mat-label>
+                <mat-form-field class="w-full rounded-xl mb-3" appearance="outline">
+                    <input matInput placeholder="3.4300456" type="number" name="number"
+                        id="number" ngModel required>
+                    <mat-error>Please enter a valid longitude</mat-error>
+                </mat-form-field>
+            </div> -->
+        </div>
+
+        <button  mat-raised-button type="submit" color="primary" [disabled]="form.invalid">Calculate Area</button>
+    </form>
+
+   
+</div>
