@@ -15,9 +15,8 @@
     <p *ngIf="calculatedArea" class="text-2xl mx-auto text-center">The calculated area is <span class="3xl font-medium">{{calculatedArea}}</span></p>
    
    
-    <ng-container *ngIf="areaCalculation.areaValue">
-        <p *ngIf="retrievedNumber" class="text-2xl mx-auto text-center">The calculated area is <span class="3xl font-medium">{{retrievedNumber}}</span></p>
+ 
+        <p *ngIf="areaCalculation.areaValue | async" class="text-2xl mx-auto text-center">The calculated area is <span class="3xl font-medium">{{areaCalculation.areaValue | async}}</span></p>
 
-    </ng-container>
    
 </div>
