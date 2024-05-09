@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CoordinateInputDialogComponent } from '../coordinate-input-dialog/coordinate-input-dialog.component';
 import { layerGroup } from 'leaflet';
 import { Location } from '@angular/common';
 import { AreaCalculationService } from 'src/app/services/area-calculation.service';
@@ -31,9 +30,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
-    this.storedArea = localStorage.getItem('area');
-    this.retrievedNumber = parseFloat(this.storedArea);
     this.areaCalculation.mapGuardState.next(false)
 
     // if (!navigator.geolocation) {
@@ -112,7 +108,7 @@ export class MapComponent implements OnInit, OnDestroy {
     let marker = null;
 
     marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.mymap)
-    if (this.coordinates.length === 5) {
+    if (this.coordinates.length === 6) {
       this.mymap.removeLayer(marker);
     }
     else {
@@ -153,7 +149,7 @@ export class MapComponent implements OnInit, OnDestroy {
   callCalculateAreaFunction() {
     if(this.coordinates.length <=0){
       this.snackBar.open(
-        'Please select 5 point to calculate the area',
+        'Please select 6 point to calculate the area',
         'Error',
         {
           duration: 5000,
@@ -184,6 +180,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   ClearArea() {
+    
     this.coordinates = [];
     this.calculatedArea = null;
 
@@ -191,6 +188,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   removeSelectedMarkers() {
+ 
     this.calculatedArea = null;
     this.areaCalculation.areaValueState.next('');
     this.router.navigate([this.router.url])
